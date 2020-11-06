@@ -1,0 +1,59 @@
+import React, { useState } from 'react';
+import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { useHistory } from "react-router-dom"
+import { forgotPasswordApi } from "../../api"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+const axios = require('axios').default;
+
+function ForgotPassword() {
+    let history = useHistory()
+
+    toast.configure()
+
+    const [inputValue, setInputValue] = useState({
+        email: "",
+    })
+
+    const emailhandler = (event: any) => {
+        let namevalue = { ...inputValue, email: event.target.value }
+        setInputValue(namevalue)
+    }
+
+    const handleSubmit = () => {
+        forgotPasswordApi(inputValue).then(resp => {
+            console.log("resp", resp)
+            if (resp.data.message == "Your frogot password request acceptes please reset your password") {
+                notify("success")
+                history.push("/resetpassword")
+            }
+        }).catch(error => {
+            notify("loginerror")
+            console.log("error", error)
+        })
+    }
+    const notify = (msg: any) => {
+        if (msg == "error") {
+            toast.error("Please fill the data")
+        } else if (msg == "success") {
+            toast.success("Forgot request successfully")
+        } else if (msg == "loginerror") {
+            toast.error("Please fill valid email")
+        }
+    }
+    console.log("inputValue", inputValue)
+    return (
+        <div className="App">
+            <p>FORGOT YOUR PASSWORD</p>
+            <Form>
+                <FormGroup>
+                    <Label for="exampleEmail">Email</Label>
+                    <Input onChange={emailhandler} type="email" name="email" id="exampleEmail" placeholder="Enter email" />
+                </FormGroup>
+                <Button onClick={() => handleSubmit()}>Submit</Button>
+            </Form>
+        </div>
+    );
+}
+
+export default ForgotPassword;
