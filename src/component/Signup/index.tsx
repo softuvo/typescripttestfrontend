@@ -43,7 +43,7 @@ function Signup() {
             }
         }).catch(error => {
             console.log("error", error.message)
-            if(error.message == "Network Error"){
+            if(error.message === "Network Error"){
                 notify("loginerror")
                 // return error.message
             }else {
