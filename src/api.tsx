@@ -2,6 +2,7 @@ const axios = require('axios').default;
 
 let url = "http://localhost:4004"
 
+
 export const signUpApi = async (inputValue: any) => {
     console.log("start", inputValue)
     let email = inputValue.email
