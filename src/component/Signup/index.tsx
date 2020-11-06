@@ -42,12 +42,13 @@ function Signup() {
                 history.push("/login")
             }
         }).catch(error => {
+            console.log("error", error.message)
             if(error.message == "Network Error"){
                 notify("loginerror")
-                return error.message
-            }
+                // return error.message
+            }else {
             notify("loginerror")
-            console.log("error", error.message)
+            }
         })
     }
     const notify = (msg: any) => {
