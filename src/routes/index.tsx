@@ -1,6 +1,5 @@
 import React from "react"
-import { BrowserRouter as Switch, HashRouter } from "react-router-dom"
-import { Router, Route } from 'react-router';
+import { BrowserRouter, HashRouter,Route,Switch } from "react-router-dom"
 import Signup from '../component/Signup'
 import Login from '../component/Login'
 import ForgotPassword from '../component/ForgotPassword'
@@ -12,12 +11,12 @@ const Routes = () => {
 
   return (
     <div>
-      <HashRouter basename="#" >
+      <BrowserRouter >
       <Switch>
           <Route path="/" exact component={Signup} />
         </Switch>
         <Switch>
-          <Route path="/login" exact component={Login} />
+          <Route path="/login/" exact component={Login} />
         </Switch>
         <Switch>
           <Route path="/forgotpassword" exact component={ForgotPassword} />
@@ -25,7 +24,7 @@ const Routes = () => {
         <Switch>
           <Route path="/resetpassword" exact component={ResetPassword} />
         </Switch>
-      </HashRouter>
+      </BrowserRouter>
     </div>
   )
 }

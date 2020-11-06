@@ -42,19 +42,17 @@ function Signup() {
                 history.push("/login")
             }
         }).catch(error => {
-            console.log("error", error.message)
-            let convert = JSON.stringify(error.message)
-            if(convert === "Network Error"){
+            console.log("error", error)
+            if(`${error.message}` === 'Network Error'){
+                notify("error")
+            }else{
                 notify("loginerror")
-                // return error.message
-            }else {
-            notify("loginerror")
             }
         })
     }
     const notify = (msg: any) => {
         if (msg == "error") {
-            toast.error("Network error")
+            toast.error("Network Error")
         } else if (msg == "success") {
             toast.success("User Register Successfully")
         } else if (msg == "loginerror") {
