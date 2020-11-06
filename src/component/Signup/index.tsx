@@ -43,7 +43,7 @@ function Signup() {
             }
         }).catch(error => {
             notify("loginerror")
-            console.log("error", error)
+            console.log("error", error.message)
         })
     }
     const notify = (msg: any) => {
