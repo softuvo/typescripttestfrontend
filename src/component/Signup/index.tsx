@@ -43,7 +43,8 @@ function Signup() {
             }
         }).catch(error => {
             console.log("error", error.message)
-            if(error.message === "Network Error"){
+            let convert = JSON.stringify(error.message)
+            if(convert === "Network Error"){
                 notify("loginerror")
                 // return error.message
             }else {
