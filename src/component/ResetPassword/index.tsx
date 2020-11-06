@@ -26,7 +26,8 @@ function ResetPassword() {
         setInputValue(namevalue)
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = (event : any) => {
+        event.preventDefault()
         resetPasswordApi(inputValue).then(resp => {
             console.log("resp", resp)
             if (resp.data.message == "Password reset successfully") {
@@ -44,23 +45,23 @@ function ResetPassword() {
         } else if (msg == "success") {
             toast.success("Password reset successfully")
         } else if (msg == "loginerror") {
-            toast.error("Please fill valid password and confirm password")
+            toast.error("Password and confirm password doesnot match")
         }
     }
     console.log("inputValue", inputValue)
     return (
-        <div className="App">
+        <div className="layout_box">
             <p>RESET YOUR PASSWORD</p>
-            <Form>
+            <Form onSubmit={(event) => handleSubmit(event)}>
                 <FormGroup>
                     <Label for="examplePassword">Password</Label>
-                    <Input onChange={passwordhandler} type="password" name="password" id="examplePassword" placeholder="Enter password" />
+                    <Input onChange={passwordhandler} type="password" name="password" id="examplePassword" placeholder="Enter password" required/>
                 </FormGroup>
                 <FormGroup>
                     <Label for="examplePassword">Confirm Password</Label>
-                    <Input onChange={confirmhandler} type="password" name="confirm_password" id="examplePassword" placeholder="Enter password" />
+                    <Input onChange={confirmhandler} type="password" name="confirm_password" id="examplePassword" placeholder="Enter password" required />
                 </FormGroup>
-                <Button onClick={() => handleSubmit()}>Submit</Button>
+                <Button >Submit</Button>
             </Form>
         </div>
     );

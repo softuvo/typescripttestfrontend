@@ -1,0 +1,64 @@
+.App {
+    background-color: #82aae6;
+    height: 100vh;
+    position: relative;
+}
+.App p {
+    margin: 0;
+    color: #82aae6;
+    padding: 20px 0;
+    font-size: 30px;
+    text-transform: uppercase;
+}
+.layout_box {
+    background-color: #dde4ef;
+    width: 500px;
+    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    padding: 0 50px 40px;
+}
+.layout_box .form-group {
+    margin-bottom: 20px;
+}
+.layout_box label {
+    display: inline-block;
+    width: 100%;
+    text-align: left;
+    font-size: 16px;
+    text-transform: capitalize;
+    margin-bottom: 7px;
+}
+.layout_box input {
+    display: inline-block;
+    width: 93%;
+    height: 32px;
+    border: 1px solid #b9d2f7;
+    padding: 0 15px;
+    box-shadow: none;
+    outline: none !important;
+}
+.signin_btn {
+    background-color: #82aae6 !important;
+    border: none;
+    box-shadow: none;
+    color: #fff;
+    padding: 10px;
+    margin-right: 10px;
+    font-size: 15px;
+    margin-top: 15px;
+}
+button.btn.btn-secondary {
+    background-color: #63d463;
+    border: none;
+    box-shadow: none;
+    color: #fff;
+    padding: 10px;
+    margin-right: 10px;
+    font-size: 15px;
+    width: 115px;
+    margin-top: 15px;
+    outline: none !important;
+}

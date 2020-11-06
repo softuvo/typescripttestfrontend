@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom"
 import { loginApi } from "../../api"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import './style.css';
 const axios = require('axios').default;
 
 function Login() {
@@ -28,13 +29,14 @@ function Login() {
         setInputValue(passwordvalue)
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = (event:any) => {
+        event.preventDefault()
         loginApi(inputValue).then(resp => {
             console.log("resp",resp)
             localStorage.setItem("token", JSON.stringify(resp.data.Info))
             if (resp.data.message == "User Login successfully") {
                 notify("success")
-                history.push("/login")
+                history.push("/")
             }
         }).catch(error => {
             notify("loginerror")
@@ -47,25 +49,25 @@ function Login() {
         } else if (msg == "success") {
             toast.success("User Login Successfully")
         } else if (msg == "loginerror") {
-            toast.error("Please fill valid email password")
+            toast.error("User not found")
         }
     }
     console.log("inputValue", inputValue)
 
     return (
-        <div className="App">
+        <div className="layout_box">
             <p>LOGIN SCREEN</p>
-            <Form>
+            <Form onSubmit={(event) => handleSubmit(event)}>
                 <FormGroup>
                     <Label for="exampleEmail">Email</Label>
-                    <Input onChange={emailhandler}type="email" name="email" id="exampleEmail" placeholder="Enter email" />
+                    <Input onChange={emailhandler}type="email" name="email" id="exampleEmail" placeholder="Enter email" required />
                 </FormGroup>
                 <FormGroup>
                     <Label for="examplePassword">Password</Label>
-                    <Input onChange={Passwordhandler} type="password" name="password" id="examplePassword" placeholder="Enter password" />
+                    <Input onChange={Passwordhandler} type="password" name="password" id="examplePassword" placeholder="Enter password" required/>
                 </FormGroup>
-                <Button onClick={() => handleSubmit()}>Submit</Button>
-                <p>Forgot Your Password ?<button onClick={() => handleForgotpassword()}>Click here</button></p>
+                <div className="forgot_password"><button  onClick={() => handleForgotpassword()}>Forgot Your Password ?</button></div>
+                <Button type="submit">Submit</Button>
             </Form>
         </div>
     );

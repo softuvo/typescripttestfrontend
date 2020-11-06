@@ -1,6 +1,6 @@
 const axios = require('axios').default;
 
-let url = `${process.env.URL}`
+let url = "http://localhost:4000"
 
 export const signUpApi = async (inputValue: any) => {
     console.log("start", inputValue)

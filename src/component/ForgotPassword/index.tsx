@@ -20,7 +20,8 @@ function ForgotPassword() {
         setInputValue(namevalue)
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = (event: any) => {
+        event.preventDefault()
         forgotPasswordApi(inputValue).then(resp => {
             console.log("resp", resp)
             if (resp.data.message == "Your frogot password request acceptes please reset your password") {
@@ -38,19 +39,19 @@ function ForgotPassword() {
         } else if (msg == "success") {
             toast.success("Forgot request successfully")
         } else if (msg == "loginerror") {
-            toast.error("Please fill valid email")
+            toast.error("Please fill the valid email address")
         }
     }
     console.log("inputValue", inputValue)
     return (
-        <div className="App">
+        <div className="layout_box">
             <p>FORGOT YOUR PASSWORD</p>
-            <Form>
+            <Form onSubmit={(event) => handleSubmit(event)}>
                 <FormGroup>
                     <Label for="exampleEmail">Email</Label>
-                    <Input onChange={emailhandler} type="email" name="email" id="exampleEmail" placeholder="Enter email" />
+                    <Input onChange={emailhandler} type="email" name="email" id="exampleEmail" placeholder="Enter email" required />
                 </FormGroup>
-                <Button onClick={() => handleSubmit()}>Submit</Button>
+                <Button type="submit">Submit</Button>
             </Form>
         </div>
     );

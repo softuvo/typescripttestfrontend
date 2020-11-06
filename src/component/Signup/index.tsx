@@ -5,8 +5,8 @@ import { useHistory } from "react-router-dom"
 import { signUpApi } from "../../api"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import './style.css';
 const axios = require('axios').default;
-
 function Signup() {
     let history = useHistory()
     const [inputValue, setInputValue] = useState({
@@ -34,7 +34,8 @@ function Signup() {
 
     console.log("inputValue", inputValue)
 
-    const handleSubmit = () => {
+    const handleSubmit = (event: any) => {
+        event.preventDefault()
         signUpApi(inputValue).then(resp => {
             if (resp.data.message == "User register successfully") {
                 notify("success")
@@ -55,23 +56,23 @@ function Signup() {
         }
     }
     return (
-        <div className="App">
+        <div className="layout_box">
             <p>Signup</p>
-            <Form>
+            <Form onSubmit={(event) => handleSubmit(event)}>
                 <FormGroup>
                     <Label for="exampleEmail">name</Label>
-                    <Input onChange={Namehandler} type="text" id="examplename" placeholder="Enter name" />
+                    <Input onChange={Namehandler} type="text" id="examplename" placeholder="Enter name" required />
                 </FormGroup>
                 <FormGroup>
                     <Label for="exampleEmail">Email</Label>
-                    <Input onChange={emailhandler} type="email" name="email" id="exampleEmail" placeholder="Enter email" />
+                    <Input onChange={emailhandler} type="email" name="email" id="exampleEmail" placeholder="Enter email" required/>
                 </FormGroup>
                 <FormGroup>
                     <Label for="examplePassword">Password</Label>
-                    <Input onChange={Passwordhandler} type="password" name="password" id="examplePassword" placeholder="Enter password" />
+                    <Input onChange={Passwordhandler} type="password" name="password" id="examplePassword" placeholder="Enter password" required/>
                 </FormGroup>
-                <Button style={{ cursor: "pointer" }} onClick={() => handleLogin()}>Sigin</Button>
-                <Button onClick={() => handleSubmit()}>Submit</Button>
+                <Button className="signin_btn" style={{ cursor: "pointer" }} onClick={() => handleLogin()}>Click to Sigin</Button>
+                <Button type="submit">Submit</Button>
             </Form>
         </div>
     );
