@@ -42,13 +42,17 @@ function Signup() {
                 history.push("/login")
             }
         }).catch(error => {
+            if(error.message == "Network Error"){
+                notify("loginerror")
+                return error.message
+            }
             notify("loginerror")
             console.log("error", error.message)
         })
     }
     const notify = (msg: any) => {
         if (msg == "error") {
-            toast.error("Please fill the data")
+            toast.error("Network error")
         } else if (msg == "success") {
             toast.success("User Register Successfully")
         } else if (msg == "loginerror") {
