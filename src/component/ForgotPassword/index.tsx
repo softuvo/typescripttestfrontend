@@ -11,6 +11,9 @@ function ForgotPassword() {
 
     toast.configure()
 
+  let regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+
+
     const [inputValue, setInputValue] = useState({
         email: "",
     })
@@ -22,6 +25,11 @@ function ForgotPassword() {
 
     const handleSubmit = (event: any) => {
         event.preventDefault()
+        if(!inputValue.email.match(regexp)){
+            console.log("inssssssssssssssss")
+            notify("error")
+            return false
+        }
         forgotPasswordApi(inputValue).then(resp => {
             console.log("resp", resp)
             if (resp.data.message == "Your frogot password request acceptes please reset your password") {
@@ -35,7 +43,7 @@ function ForgotPassword() {
     }
     const notify = (msg: any) => {
         if (msg == "error") {
-            toast.error("Please fill the data")
+            toast.error("Please fill the valid email address")
         } else if (msg == "success") {
             toast.success("Forgot request successfully")
         } else if (msg == "loginerror") {

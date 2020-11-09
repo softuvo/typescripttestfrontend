@@ -28,9 +28,14 @@ function Login() {
         let passwordvalue = { ...inputValue, password: event.target.value }
         setInputValue(passwordvalue)
     }
+    let regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
 
     const handleSubmit = (event:any) => {
         event.preventDefault()
+        if(!inputValue.email.match(regexp)){
+            notify("emailerror")
+            return false
+        }
         loginApi(inputValue).then(resp => {
             console.log("resp",resp)
             localStorage.setItem("token", JSON.stringify(resp.data.Info))
@@ -50,6 +55,8 @@ function Login() {
             toast.success("User Login Successfully")
         } else if (msg == "loginerror") {
             toast.error("User not found")
+        }else if(msg == "emailerror"){
+            toast.error("Please fill the valid email address")
         }
     }
     console.log("inputValue", inputValue)

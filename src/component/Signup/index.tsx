@@ -33,9 +33,14 @@ function Signup() {
     }
 
     console.log("inputValue", inputValue)
+    let regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
 
     const handleSubmit = (event: any) => {
         event.preventDefault()
+        if(!inputValue.email.match(regexp)){
+            notify("emailerror")
+            return false
+        }
         signUpApi(inputValue).then(resp => {
             if (resp.data.message == "User register successfully") {
                 notify("success")
@@ -57,6 +62,8 @@ function Signup() {
             toast.success("User Register Successfully")
         } else if (msg == "loginerror") {
             toast.error("User already exist")
+        }else if(msg == "emailerror"){
+            toast.error("Please fill the valid email address")
         }
     }
     return (
