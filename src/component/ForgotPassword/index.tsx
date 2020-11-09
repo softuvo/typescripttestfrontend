@@ -39,7 +39,7 @@ function ForgotPassword() {
         } else if (msg == "success") {
             toast.success("Forgot request successfully")
         } else if (msg == "loginerror") {
-            toast.error("Please fill the valid email address")
+            toast.error("User mot found")
         }
     }
     console.log("inputValue", inputValue)
