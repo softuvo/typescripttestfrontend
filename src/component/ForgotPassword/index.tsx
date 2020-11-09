@@ -39,7 +39,7 @@ function ForgotPassword() {
         } else if (msg == "success") {
             toast.success("Forgot request successfully")
         } else if (msg == "loginerror") {
-            toast.error("User mot found")
+            toast.error("User not found")
         }
     }
     console.log("inputValue", inputValue)
